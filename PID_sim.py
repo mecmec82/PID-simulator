@@ -23,14 +23,15 @@ class PIDController:
 # Streamlit app
 st.title("PID Controller Simulation")
 
-# User inputs
-initial_value = st.number_input("Initial Value", value=0.0)
-target_value = st.number_input("Target Value", value=1.0)
-Kp = st.number_input("Kp", value=1.0)
-Ki = st.number_input("Ki", value=0.0)
-Kd = st.number_input("Kd", value=0.0)
-simulation_time = st.number_input("Simulation Time (seconds)", value=10.0)
-dt = st.number_input("Time Step (seconds)", value=0.01)
+# Sidebar for user inputs
+st.sidebar.title("Controls")
+initial_value = st.sidebar.slider("Initial Value", min_value=0.0, max_value=10.0, value=0.0)
+target_value = st.sidebar.slider("Target Value", min_value=0.0, max_value=10.0, value=1.0)
+Kp = st.sidebar.slider("Kp", min_value=0.0, max_value=10.0, value=1.0)
+Ki = st.sidebar.slider("Ki", min_value=0.0, max_value=10.0, value=0.0)
+Kd = st.sidebar.slider("Kd", min_value=0.0, max_value=10.0, value=0.0)
+simulation_time = st.sidebar.slider("Simulation Time (seconds)", min_value=1.0, max_value=100.0, value=10.0)
+dt = st.sidebar.slider("Time Step (seconds)", min_value=0.001, max_value=1.0, value=0.01)
 
 # Initialize PID controller
 pid = PIDController(Kp, Ki, Kd, target_value)
